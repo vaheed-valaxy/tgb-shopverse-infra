@@ -1,6 +1,6 @@
 # Security Group for Bastion Host
 module "alb_sg" {
-  source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/alb"
+  source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/sg"
 
   vpc_id         = module.vpc.vpc_id
   sg_name        = local.alb_sg_name
