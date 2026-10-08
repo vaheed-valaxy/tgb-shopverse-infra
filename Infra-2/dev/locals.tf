@@ -9,6 +9,7 @@ locals {
 
   bastion_sg_name = "${local.resource_name}-bastion-sg"
   bastion_sg_id   = module.bastion_sg.sg_id
+  alb_sg_name     = "${local.resource_name}-alb-sg"
 
   eks_cluster_name       = "${local.resource_name}-eks-cluster"            # ecommerce-dev-eks-cluster
   eks_cluster_subnet_ids = module.vpc.private_subnet_ids
