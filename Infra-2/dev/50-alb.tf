@@ -23,13 +23,12 @@ resource "aws_security_group_rule" "alb_internet" {
 module "alb" {
   source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/alb"
 
-  internal = false
-  internal              = false
-  alb_sg_ids            = [local.web_alb_sg_id]
-  subnets               = module.vpc.public_subnet_ids  
-  vpc_id                = module.vpc.vpc_id
+  internal    = false
+  alb_sg_ids  = [module.alb_sg.sg_id]
+  subnets     = module.vpc.public_subnet_ids  
+  vpc_id      = module.vpc.vpc_id
 
-  project_name = var.project
+  project      = var.project
   env          = var.env
-  common_tags  = var.common_tags
+  common_tags  = local.common_tags
 }
