@@ -30,7 +30,7 @@ resource "aws_launch_template" "eks_nodes" {
 
   vpc_security_group_ids = [
     aws_eks_cluster.main.vpc_config[0].cluster_security_group_id,
-    module.node_sg.sg_id
+    aws_security_group.eks_node_sg.id
   ]
 
   tag_specifications {
