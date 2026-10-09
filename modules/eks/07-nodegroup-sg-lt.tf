@@ -1,5 +1,6 @@
 # Security Group for EKS Node Group
 resource "aws_security_group" "eks_node_sg" {
+  count = var.
   name        = "${var.cluster_name}-node-sg"
   description = "Additional security group for EKS worker nodes"
   vpc_id      = var.vpc_id
@@ -34,7 +35,7 @@ resource "aws_security_group_rule" "bastion_to_eks_node_ssh" {
 resource "aws_launch_template" "eks_nodes" {
   name_prefix = "${var.cluster_name}-nodes-"
 
-  key_name = var.node_key_name
+  key_name = var.node_ssh_key_name
 
   vpc_security_group_ids = [
     aws_eks_cluster.main.vpc_config[0].cluster_security_group_id,
