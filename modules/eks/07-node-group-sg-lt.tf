@@ -4,7 +4,7 @@ module "node_sg" {
 
   vpc_id         = var.vpc_id
   sg_name        = "${var.cluster_name}-node-sg"
-  sg_description = "EKS Node Group Security Group"
+  sg_description = "EKS Node Security Group"
 
   common_tags    = local.common_tags
 }
