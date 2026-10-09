@@ -42,6 +42,13 @@ resource "aws_launch_template" "eks_nodes" {
     aws_security_group.eks_node_sg.id
   ]
 
+  # Tags applied to the launch template resource
+  tags = {
+    Project = var.project
+    Env     = var.env
+  }
+
+  # Tags applied to EC2 instances launched from this template
   tag_specifications {
     resource_type = "instance"
 
