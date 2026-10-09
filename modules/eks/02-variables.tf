@@ -21,7 +21,7 @@ variable cluster_endpoint_public_access { type = bool }
 
 #############################################             Node Group Variables           #################################################
 
-variable "node_ssh_key_name"     { default = null }
+variable "node_ssh_key_name" { default = null }
 
 variable node_subnet_ids     { type = list(string) }
 
