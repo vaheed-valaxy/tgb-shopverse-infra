@@ -1,4 +1,4 @@
-# Security Group for Bastion Host
+# Security Group for ALB
 module "alb_sg" {
   source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/sg"
 
@@ -10,13 +10,23 @@ module "alb_sg" {
 }
 
 # Security Group Rule for ALB
-resource "aws_security_group_rule" "alb_internet" {
+resource "aws_security_group_rule" "internet_to_alb" {
   type              = "ingress"
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = module.alb_sg.sg_id                       
+  security_group_id = module.alb_sg.sg_id 
+}
+
+# Security Group Rule for allowing traffic from ALB to EKS nodes
+resource "aws_security_group_rule" "alb_to_nodegroup" {
+  type              = "ingress"
+  from_port         = 8080
+  to_port           = 8080
+  protocol          = "tcp"
+  security_group_id = module.eks.node_security_group_id
+  source_security_group_id = module.alb_sg.sg_id 
 }
 
 # ALB Module Calling
@@ -55,4 +65,6 @@ module "alb" {
   project      = var.project
   env          = var.env
   common_tags  = local.common_tags
+
+  depends_on = [ module.alb_sg, aws_security_group_rule.internet_to_alb", aws_security_group_rule.alb_to_nodegroup ]
 }
