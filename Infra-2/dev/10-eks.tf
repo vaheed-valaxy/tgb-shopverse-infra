@@ -8,6 +8,8 @@ module "eks" {
   # public_subnet_ids   = module.vpc.public_subnet_ids      # For Tagging 
   # private_subnet_ids  = module.vpc.private_subnet_ids     # For Tagging 
 
+  vpc_id                           = module.vpc.vpc_id
+
   cluster_name                     = local.eks_cluster_name
   cluster_version                  = "1.33"
   cluster_subnet_ids               = local.eks_cluster_subnet_ids       # (since vpc outputs as list, so [] not required)
