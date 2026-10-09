@@ -9,24 +9,34 @@ module "bastion_sg" {
   common_tags    = local.common_tags
 }
 
-# Security Group Rule for Bastion Host
-resource "aws_security_group_rule" "bastion_ssh" {
+# SSH into Bastion Host
+resource "aws_security_group_rule" "ssh_to_bastion" {
   type              = "ingress"
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = module.bastion_sg.sg_id                       # aws_security_group.sg_nat_instance.id
+  security_group_id = module.bastion_sg.sg_id                       
 }
 
-# Security Group Rule for Bastion Host (For Argocd access)
-resource "aws_security_group_rule" "bastion_argocd" {
+# Bastion to ArgoCD
+resource "aws_security_group_rule" "bastion_to_argocd" {
   type              = "ingress"
   from_port         = 8090
   to_port           = 8090
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = module.bastion_sg.sg_id                       # aws_security_group.sg_nat_instance.id
+  security_group_id = module.bastion_sg.sg_id                       
+}
+
+# Bastion to EKS node SSH
+resource "aws_security_group_rule" "bastion_to_eks_node_ssh" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  security_group_id = module.eks.node_security_group_id
+  source_security_group_id = module.bastion_sg.sg_id 
 }
 
 # Bastion Host
@@ -47,5 +57,5 @@ module "bastion_ec2" {
   env          = var.env
   common_tags  = local.common_tags
 
-  depends_on = [ module.bastion_sg, aws_security_group_rule.bastion_ssh, aws_security_group_rule.bastion_argocd ]
+  depends_on = [ module.bastion_sg, aws_security_group_rule.ssh_to_bastion, aws_security_group_rule.bastion_to_argocd, aws_security_group_rule.bastion_to_eks_node_ssh ]
 }
