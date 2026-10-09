@@ -33,6 +33,26 @@ module "alb" {
 
   # acm_certificate_arn = var.acm_certificate_arn
 
+  services = {
+
+    frontend = {
+      tg_name       = "frontend-tg"
+      port          = 8080
+      health_path   = "/health"
+      path_patterns = ["/*"]
+      priority      = 200
+    }
+
+    backend = {
+      tg_name       = "backend-tg"
+      port          = 8080
+      health_path   = "/health"
+      path_patterns = ["/api/*"]
+      priority      = 100
+    }
+  }
+
+
   project      = var.project
   env          = var.env
   common_tags  = local.common_tags
