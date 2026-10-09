@@ -40,7 +40,7 @@ output "cluster_security_group_id" {
 
 output "node_security_group_id" {
   description = "Node Security Group"
-  value       = module.node_sg.sg_id
+  value       = aws_security_group.eks_node_sg.id
 }
 
 #output "to_configure_kubectl" {
