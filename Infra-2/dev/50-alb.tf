@@ -9,7 +9,7 @@ module "alb_sg" {
   common_tags    = local.common_tags
 }
 
-# Security Group Rule for ALB
+# ALB allowing traffic from internet
 resource "aws_security_group_rule" "internet_to_alb" {
   type              = "ingress"
   from_port         = 0
@@ -19,7 +19,7 @@ resource "aws_security_group_rule" "internet_to_alb" {
   security_group_id = module.alb_sg.sg_id 
 }
 
-# Security Group Rule for allowing traffic from ALB to EKS nodes
+# Allowing traffic from ALB to EKS nodes
 resource "aws_security_group_rule" "alb_to_nodegroup" {
   type              = "ingress"
   from_port         = 8080
