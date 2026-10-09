@@ -19,7 +19,7 @@ resource "aws_security_group_rule" "internet_to_alb" {
   security_group_id = module.alb_sg.sg_id 
 }
 
-# Allowing traffic from ALB to EKS nodes on port 8080
+# EKS nodes allowing traffic from ALB on port 8080
 resource "aws_security_group_rule" "alb_to_nodegroup" {
   type              = "ingress"
   from_port         = 8080
