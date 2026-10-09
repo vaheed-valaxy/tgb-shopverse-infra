@@ -2,7 +2,7 @@
 module "eks" {
   source = "git::https://github.com/vaheedgit26/infra-1.0.git//modules/eks"
 
-  project             = var.project  # "ecommerce"
+  project             = var.project  # "shopverse"
   env                 = var.env      # "dev"
 
   # public_subnet_ids   = module.vpc.public_subnet_ids      # For Tagging 
