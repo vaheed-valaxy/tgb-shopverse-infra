@@ -31,6 +31,7 @@ module "alb" {
   target_type  = "ip"
   vpc_id       = module.vpc.vpc_id
 
+  listener_mode = "http"    # https, http_to_https
   # acm_certificate_arn = var.acm_certificate_arn
 
   services = {
