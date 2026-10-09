@@ -57,14 +57,16 @@ module "alb" {
       tg_name       = "backend-tg"
       port          = 8080
       health_path   = "/health"
-      path_patterns = ["/api/*"]
+      path_patterns = ["/api", "/api/*"]   
       priority      = 100
     }
   }
+
+  # path_patterns = ["/api/*"]
 
   project      = var.project
   env          = var.env
   common_tags  = local.common_tags
 
-  depends_on = [ module.alb_sg, aws_security_group_rule.internet_to_alb", aws_security_group_rule.alb_to_nodegroup ]
+  depends_on = [ module.alb_sg, aws_security_group_rule.internet_to_alb, aws_security_group_rule.alb_to_nodegroup ]
 }
