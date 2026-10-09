@@ -7,6 +7,12 @@ resource "aws_eks_cluster" "main" {
   version  = var.cluster_version
   role_arn = aws_iam_role.eks_cluster.arn
 
+  # For Node group Security group
+  launch_template {
+    id      = aws_launch_template.eks_nodes.id
+    version = tostring(aws_launch_template.eks_nodes.latest_version)
+  }
+
   # VPC configuration for control plane networking
   vpc_config {
     subnet_ids              = var.cluster_subnet_ids
