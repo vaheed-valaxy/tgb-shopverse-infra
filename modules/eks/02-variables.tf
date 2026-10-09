@@ -21,7 +21,7 @@ variable cluster_endpoint_public_access { type = bool }
 
 #############################################             Node Group Variables           #################################################
 
-variable "node_key_name"     { type = string }
+variable "node_key_name"     { default = null }
 
 variable node_subnet_ids     { type = list(string) }
 
@@ -41,8 +41,9 @@ variable "node_disk_size" {
 }
 # variable "node_ssh_public_key" { type = string }
 
-variable "enable_bastion_access" { default = null }
-variable "bastion_sg_id"         { default = null }
+variable "enable_bastion_access_to_cluster"    { default = null }
+variable "enable_ssh_node_access_from_bastion" { default = null }
+variable "bastion_sg_id"                       { default = null }
 
 
 variable "desired_capacity" { type = number }
