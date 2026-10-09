@@ -13,6 +13,12 @@ resource "aws_eks_node_group" "main" {
   #  source_security_group_ids = var.node_addl_sg_ids       # [bastion_sg]
   #}
 
+  # For Node group Security group
+  launch_template {
+    id      = aws_launch_template.eks_nodes.id
+    version = tostring(aws_launch_template.eks_nodes.latest_version)
+  }
+
   scaling_config {
     desired_size = var.desired_capacity
     min_size     = var.min_size
