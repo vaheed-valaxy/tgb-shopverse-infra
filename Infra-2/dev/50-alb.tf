@@ -34,7 +34,6 @@ module "alb" {
   # acm_certificate_arn = var.acm_certificate_arn
 
   services = {
-
     frontend = {
       tg_name       = "frontend-tg"
       port          = 8080
@@ -51,7 +50,6 @@ module "alb" {
       priority      = 100
     }
   }
-
 
   project      = var.project
   env          = var.env
