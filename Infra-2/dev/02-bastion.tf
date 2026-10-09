@@ -29,16 +29,6 @@ resource "aws_security_group_rule" "bastion_to_argocd" {
   security_group_id = module.bastion_sg.sg_id                       
 }
 
-# Bastion to EKS node SSH
-resource "aws_security_group_rule" "bastion_to_eks_node_ssh" {
-  type              = "ingress"
-  from_port         = 22
-  to_port           = 22
-  protocol          = "tcp"
-  security_group_id = module.eks.node_security_group_id
-  source_security_group_id = module.bastion_sg.sg_id 
-}
-
 # Bastion Host
 module "bastion_ec2" {
   source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/ec2"
