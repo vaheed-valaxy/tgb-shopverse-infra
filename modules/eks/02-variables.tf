@@ -21,6 +21,8 @@ variable cluster_endpoint_public_access { type = bool }
 
 #############################################             Node Group Variables           #################################################
 
+variable "node_key_name"     { type = string }
+
 variable node_subnet_ids     { type = list(string) }
 
 variable node_instance_types { type = list(string) }
