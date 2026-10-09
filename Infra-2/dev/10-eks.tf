@@ -1,13 +1,3 @@
-# Bastion to EKS node SSH
-resource "aws_security_group_rule" "bastion_to_eks_node_ssh" {
-  type              = "ingress"
-  from_port         = 22
-  to_port           = 22
-  protocol          = "tcp"
-  security_group_id = module.eks.node_security_group_id
-  source_security_group_id = module.bastion_sg.sg_id 
-}
-
 # Calling EKS Cluster
 module "eks" {
   # source = "git::https://github.com/vaheedgit26/infra-1.0.git//modules/eks"
@@ -34,9 +24,10 @@ module "eks" {
   node_capacity_type    = "SPOT"        # ON_DEMAND / SPOT
   node_auto_scaler_tags = local.node_auto_scaler_tags
 
-  # Cluster access from Bastion
-  enable_bastion_access = true
-  bastion_sg_id         = local.bastion_sg_id                     # module.bastion_sg.sg_id
+  # Cluster and Node access from Bastion
+  enable_bastion_access_to_cluster    = true
+  enable_ssh_node_access_from_bastion = true
+  bastion_sg_id = local.bastion_sg_id                     # module.bastion_sg.sg_id
 
   node_key_name         = "us-east-1"
   # node_addl_sg_ids    = [module.bastion_sg.sg_id]               # SSH to Node instance, This is additional cluster SG and the default cluster SG is intact
