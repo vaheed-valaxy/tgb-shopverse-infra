@@ -46,7 +46,7 @@ module "alb" {
 
   services = {
     frontend = {
-      tg_name       = "frontend-tg"
+      tg_name       = "${local.resource_name}-frontend-tg"
       port          = 8080
       health_path   = "/health"
       path_patterns = ["/*"]
@@ -54,7 +54,7 @@ module "alb" {
     }
 
     backend = {
-      tg_name       = "backend-tg"
+      tg_name       = "${local.resource_name}-backend-tg"
       port          = 8080
       health_path   = "/health"
       path_patterns = ["/api", "/api/*"]   
