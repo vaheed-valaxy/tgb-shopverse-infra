@@ -1,6 +1,8 @@
 # Calling EKS Cluster
 module "eks" {
-  source = "git::https://github.com/vaheedgit26/infra-1.0.git//modules/eks"
+  # source = "git::https://github.com/vaheedgit26/infra-1.0.git//modules/eks"
+
+  source = "../../modules/eks"
 
   project             = var.project  # "shopverse"
   env                 = var.env      # "dev"
