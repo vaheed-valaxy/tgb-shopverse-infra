@@ -6,7 +6,7 @@ resource "aws_eks_node_group" "main" {
   subnet_ids      = var.node_subnet_ids
   instance_types  = var.node_instance_types
   capacity_type   = var.node_capacity_type   # ON_DEMAND/ SPOT
-  disk_size       = var.node_disk_size
+  # disk_size       = var.node_disk_size     # Not needed if you use launch template and gives error
 
   #remote_access {
   #  ec2_ssh_key               = var.node_ssh_public_key    # "my-key"
@@ -14,19 +14,19 @@ resource "aws_eks_node_group" "main" {
   #}
 
   # For Node group Security group
-  # launch_template {
-  #   id      = aws_launch_template.eks_nodes.id
-  #   version = tostring(aws_launch_template.eks_nodes.latest_version)
+  # dynamic "launch_template" {
+  #   for_each = var.enable_node_ssh_access_from_bastion ? [1] : []
+
+  #   content {
+  #     id      = aws_launch_template.eks_nodes.id
+  #     version = tostring(aws_launch_template.eks_nodes.latest_version)
+  #   }
   # }
 
   # For Node group Security group
-  dynamic "launch_template" {
-    for_each = var.enable_node_ssh_access_from_bastion ? [1] : []
-
-    content {
-      id      = aws_launch_template.eks_nodes[0].id
-      version = tostring(aws_launch_template.eks_nodes[0].latest_version)
-    }
+  launch_template {
+    id      = aws_launch_template.eks_nodes.id
+    version = tostring(aws_launch_template.eks_nodes.latest_version)
   }
 
   scaling_config {
