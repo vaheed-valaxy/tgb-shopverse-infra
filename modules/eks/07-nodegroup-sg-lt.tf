@@ -30,7 +30,8 @@ resource "aws_security_group_rule" "bastion_to_eks_node_ssh" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  security_group_id = aws_security_group.eks_node_sg.id
+  # security_group_id = aws_security_group.eks_node_sg.id
+  security_group_id = aws_security_group.eks_node_sg[0].id
   source_security_group_id = var.bastion_sg_id
 }
 
@@ -44,7 +45,7 @@ resource "aws_launch_template" "eks_nodes" {
 
   vpc_security_group_ids = [
     aws_eks_cluster.main.vpc_config[0].cluster_security_group_id,
-    aws_security_group.eks_node_sg.id
+    aws_security_group.eks_node_sg[0].id
   ]
 
   # Tags applied to the launch template resource
