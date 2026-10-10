@@ -1,6 +1,7 @@
 # Security Group for EKS Node Group
 resource "aws_security_group" "eks_node_sg" {
-  count = var.
+  count = var.enable_node_ssh_access_from_bastion ? 1: 0
+
   name        = "${var.cluster_name}-node-sg"
   description = "Additional security group for EKS worker nodes"
   vpc_id      = var.vpc_id
@@ -23,6 +24,8 @@ resource "aws_security_group" "eks_node_sg" {
 
 # Bastion to EKS node SSH
 resource "aws_security_group_rule" "bastion_to_eks_node_ssh" {
+  count = var.enable_node_ssh_access_from_bastion ? 1: 0
+
   type              = "ingress"
   from_port         = 22
   to_port           = 22
@@ -33,6 +36,8 @@ resource "aws_security_group_rule" "bastion_to_eks_node_ssh" {
 
 # Launch Template for Node Group
 resource "aws_launch_template" "eks_nodes" {
+  count = var.enable_node_ssh_access_from_bastion ? 1: 0
+
   name_prefix = "${var.cluster_name}-nodes-"
 
   key_name = var.node_ssh_key_name
