@@ -45,6 +45,17 @@ resource "aws_launch_template" "eks_nodes" {
     aws_security_group.eks_node_sg.id
   ]
 
+  block_device_mappings {
+    device_name = "/dev/xvda"
+  
+    ebs {
+      volume_size           = var.node_disk_size
+      volume_type           = "gp3"
+      encrypted             = true
+      delete_on_termination = true
+    }
+  }
+
   # Tags applied to the launch template resource
   tags = {
     Project = var.project
