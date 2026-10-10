@@ -23,8 +23,10 @@ resource "aws_eks_node_group" "main" {
   dynamic "launch_template" {
     for_each = var.enable_node_ssh_access_from_bastion ? [1] : []
 
-    id      = aws_launch_template.eks_nodes.id
-    version = tostring(aws_launch_template.eks_nodes[0].latest_version)
+    content {
+      id      = aws_launch_template.eks_nodes[0].id
+      version = tostring(aws_launch_template.eks_nodes[0].latest_version)
+    }
   }
 
   scaling_config {
