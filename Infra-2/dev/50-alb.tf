@@ -68,5 +68,5 @@ module "alb" {
   env          = var.env
   common_tags  = local.common_tags
 
-  depends_on = [ module.alb_sg, aws_security_group_rule.internet_to_alb, aws_security_group_rule.alb_to_nodegroup ]
+  depends_on = [ module.alb_sg, aws_security_group_rule.internet_to_alb, aws_security_group_rule.alb_to_eks_nodegroup ]
 }
