@@ -39,7 +39,7 @@ output "cluster_security_group_id" {
 }
 
 output "node_security_group_id" {
-  description = "Node Security Group"
+  description = "EKS Node Security Group"
   value       = aws_security_group.eks_node_sg.id
 }
 
