@@ -49,8 +49,8 @@ resource "aws_launch_template" "eks_nodes" {
     ebs {
       volume_size           = var.node_disk_size
       volume_type           = "gp3"
-      # encrypted             = true
       delete_on_termination = true
+      # encrypted             = true
     }
   }
 
