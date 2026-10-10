@@ -34,11 +34,9 @@ resource "aws_security_group_rule" "bastion_to_eks_node_ssh" {
 
 # Launch Template for Node Group
 resource "aws_launch_template" "eks_nodes" {
-  count = var.enable_node_ssh_access_from_bastion ? 1: 0
 
   name_prefix = "${var.cluster_name}-nodes-"
-
-  key_name = var.node_ssh_key_name
+  key_name    = var.node_ssh_key_name
 
   vpc_security_group_ids = [
     aws_eks_cluster.main.vpc_config[0].cluster_security_group_id,
@@ -51,7 +49,7 @@ resource "aws_launch_template" "eks_nodes" {
     ebs {
       volume_size           = var.node_disk_size
       volume_type           = "gp3"
-      encrypted             = true
+      # encrypted             = true
       delete_on_termination = true
     }
   }
