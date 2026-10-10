@@ -47,5 +47,5 @@ module "bastion_ec2" {
   env          = var.env
   common_tags  = local.common_tags
 
-  depends_on = [ module.bastion_sg, aws_security_group_rule.ssh_to_bastion, aws_security_group_rule.bastion_to_argocd, aws_security_group_rule.bastion_to_eks_node_ssh ]
+  depends_on = [ module.bastion_sg, aws_security_group_rule.ssh_to_bastion, aws_security_group_rule.bastion_to_argocd ]
 }
