@@ -38,7 +38,7 @@ resource "aws_eks_cluster" "main" {
 
 # Allow EKS cluster access from Bastion Host on Port: 443
 resource "aws_security_group_rule" "eks_api_from_bastion" {
-  count = ( var.cluster_endpoint_public_access == false || var.enable_bastion_access ) ? 1 : 0
+  count = ( var.cluster_endpoint_public_access == false || var.enable_bastion_access_to_cluster ) ? 1 : 0
 
   type                     = "ingress"
   from_port                = 443        # 0          
