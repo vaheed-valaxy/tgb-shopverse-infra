@@ -16,9 +16,17 @@ resource "aws_eks_node_group" "main" {
   #}
 
   # For Node group Security group
-  launch_template {
+  # launch_template {
+  #   id      = aws_launch_template.eks_nodes.id
+  #   version = tostring(aws_launch_template.eks_nodes.latest_version)
+  # }
+
+  # For Node group Security group
+  dynamic "launch_template" {
+    for_each = var.enable_node_ssh_access_from_bastion ? [1] : []
+
     id      = aws_launch_template.eks_nodes.id
-    version = tostring(aws_launch_template.eks_nodes.latest_version)
+    version = tostring(aws_launch_template.eks_nodes[0].latest_version)
   }
 
   scaling_config {
