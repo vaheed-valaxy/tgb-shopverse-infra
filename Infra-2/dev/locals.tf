@@ -37,6 +37,6 @@ locals {
   availability_zone          = module.vpc.availability_zones[0]
   shopverse_secret_json      = jsondecode(data.aws_secretsmanager_secret_version.shopverse_secret_value.secret_string)
   db_subnet_group_name       = "${local.resource_name}-mysql-rds-db-subnet-group"
-  rds_vpc_security_group_ids = [module.eks.cluster_security_group_id, module.bastion_sg.sg_id]
+  rds_vpc_security_group_ids = [module.eks.node_security_group_id, module.bastion_sg.sg_id]
   # rds_vpc_security_group_ids = [module.eks.cluster_security_group_id, module.bastion_sg.sg_id]
 }
