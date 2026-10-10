@@ -42,12 +42,12 @@ variable "node_disk_size" {
 # variable "node_ssh_public_key" { type = string }
 
 variable "enable_bastion_access_to_cluster"    { 
-  type = boolean
+  type = bool
   default = false 
 }
 
 variable "enable_node_ssh_access_from_bastion" { 
-  type = boolean
+  type = bool
   default = false 
 }
 
