@@ -1,5 +1,7 @@
 # EKS Node Group
 resource "aws_eks_node_group" "main" {
+  count = var.enable_node_ssh_access_from_bastion ? 1: 0
+
   cluster_name    = aws_eks_cluster.main.name
   node_group_name = "${var.cluster_name}-node-group"
   node_role_arn   = aws_iam_role.eks_nodegroup_role.arn
