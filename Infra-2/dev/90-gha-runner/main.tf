@@ -2,7 +2,7 @@
 module "gha_runner_sg" {
   source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/sg"
 
-  vpc_id         = local.vpc_id
+  vpc_id         = module.vpc.vpc_id                        # local.vpc_id
   sg_name        = "${local.resource_name}-gha-runner-sg"
   sg_description = "GHA-Runner Instance Security Group"
 
@@ -37,7 +37,7 @@ module "gha_runner_ec2" {
   instance_type               = "t3.micro"                        # var.instance_type
   public_key_name             = var.public_key_name               # "us-east-1"
   sg_ids                      = [module.gha_runner_sg.sg_id]      # [local.sg_id]
-  subnet_id                   = local.public_subnet_ids[0]   
+  subnet_id                   = module.vpc.public_subnet_ids[0]   # local.public_subnet_ids[0]   
   associate_public_ip_address = true
   what_type_instance          = "GHA-Runner"
 
