@@ -19,6 +19,16 @@ resource "aws_security_group_rule" "ssh_to_gha_runner" {
   security_group_id = module.gha_runner_sg.sg_id                       
 }
 
+# ArgoCD access from GHA-Runner 
+resource "aws_security_group_rule" "gha_runner_to_argocd" {
+  type              = "ingress"
+  from_port         = 8090
+  to_port           = 8090
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = module.gha_runner_sg.sg_id                       # aws_security_group.sg_nat_instance.id
+}
+
 # GHA - Runner
 module "gha_runner_ec2" {
   source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/ec2"
@@ -38,5 +48,5 @@ module "gha_runner_ec2" {
   env          = var.env
   common_tags  = local.common_tags
 
-  depends_on = [ module.gha_runner_sg, aws_security_group_rule.ssh_to_gha_runner ]
+  depends_on = [ module.gha_runner_sg, aws_security_group_rule.ssh_to_gha_runner, aws_security_group_rule.gha_runner_to_argocd ]
 }
