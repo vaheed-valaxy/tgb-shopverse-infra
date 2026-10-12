@@ -3,6 +3,11 @@ output "cluster_name" {
   value       = aws_eks_cluster.main.name
 }
 
+output "cluster_arn" {
+  description = "ARN of the EKS cluster"
+  value       = aws_eks_cluster.main.arn
+}
+
 output "cluster_version" {
   description = "Name of the EKS cluster"
   value       = aws_eks_cluster.main.version
