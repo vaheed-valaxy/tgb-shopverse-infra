@@ -41,6 +41,8 @@ module "gha_runner_ec2" {
   associate_public_ip_address = true
   what_type_instance          = "GHA-Runner"
 
+  iam_instance_profile = aws_iam_instance_profile.gha_runner_instance_role.name
+
   # user_data = file("${path.module}/mysql_client_8.sh")
   user_data = file("runner.sh")
  
