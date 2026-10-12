@@ -7,6 +7,6 @@ locals {
     Terraform   = "True"
   }
 
-  vpc_id            = data.terraform_remote_state.vpc.outputs.vpc_id
-  public_subnet_ids = data.terraform_remote_state.vpc.outputs.public_subnet_ids
+  # vpc_id            = data.terraform_remote_state.vpc.outputs.vpc_id
+  # public_subnet_ids = data.terraform_remote_state.vpc.outputs.public_subnet_ids
 }
