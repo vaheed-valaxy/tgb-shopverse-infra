@@ -25,7 +25,7 @@ resource "aws_iam_role" "gha_runner_role" {
 
 # IAM Policy
 resource "aws_iam_policy" "gha_runner_eks_describe_policy" {
-  name  = "${local.resource_name}-runner-eks-describe"
+  name  = "${local.resource_name}-gha-runner-eks-describe"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -47,6 +47,6 @@ resource "aws_iam_role_policy_attachment" "gha_runner_eks_describe_policy_attach
 
 # Create IAM instance Role
 resource "aws_iam_instance_profile" "gha_runner_instance_role" {
-  name  = "${local.resource_name}-runner-instance-role"
+  name  = "${local.resource_name}-gha-runner-instance-role"
   role  = aws_iam_role.gha_runner_role.name
 }
