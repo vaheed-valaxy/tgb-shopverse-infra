@@ -12,7 +12,7 @@ terraform {
   # Remote Backend
   backend "s3" {
     bucket         = "shopverse-dev-tfstate-123"
-    key            = "shopverse-vpc-eks/terraform.tfstate"
+    key            = "gha-runner/terraform.tfstate"
     region         = "us-east-1"
     use_lockfile   = true   # Enables native S3 state locking (Terraform 1.10+)
     # encrypt        = true
