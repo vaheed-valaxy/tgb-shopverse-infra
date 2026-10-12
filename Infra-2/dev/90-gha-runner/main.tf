@@ -44,3 +44,9 @@ resource "aws_iam_role_policy_attachment" "runner_eks_describe" {
   role       = aws_iam_role.gha_runner_role.name
   policy_arn = aws_iam_policy.runner_eks_runner_eks_describe.arn
 }
+
+# Create IAM Role
+resource "aws_iam_instance_profile" "runner" {
+  name  = "${var.project}-${var.environment}-runner"
+  role  = aws_iam_role.runner[0].name
+}
