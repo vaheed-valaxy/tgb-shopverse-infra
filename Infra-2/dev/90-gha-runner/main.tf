@@ -2,9 +2,9 @@
 module "gha_runner_sg" {
   source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/sg"
 
-  vpc_id         = module.vpc.vpc_id
-  sg_name        = local.bastion_sg_name
-  sg_description = "Bastion Instance Security Group"
+  vpc_id         = local.vpc_id
+  sg_name        = "${local.resource_name}-gha-runner-sg"
+  sg_description = "GHA-Runner Instance Security Group"
 
   common_tags    = local.common_tags
 }
@@ -19,7 +19,7 @@ resource "aws_security_group_rule" "ssh_to_gha_runner" {
   security_group_id = module.gha_runner_sg.sg_id                       
 }
 
-# Bastion Host
+# GHA - Runner
 module "gha_runner_ec2" {
   source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/ec2"
 
@@ -27,7 +27,7 @@ module "gha_runner_ec2" {
   instance_type               = "t3.micro"                        # var.instance_type
   public_key_name             = var.public_key_name               # "us-east-1"
   sg_ids                      = [module.gha_runner_sg.sg_id]      # [local.sg_id]
-  subnet_id                   = module.vpc.public_subnet_ids[0]   # local.public_subnet_ids[0] 
+  subnet_id                   = local.public_subnet_ids[0]   
   associate_public_ip_address = true
   what_type_instance          = "GHA-Runner"
 
