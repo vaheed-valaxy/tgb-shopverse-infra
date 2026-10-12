@@ -17,15 +17,15 @@ resource "aws_iam_role" "gha_runner_role" {
   assume_role_policy = data.aws_iam_policy_document.gha_runner_trust_policy.json
 
   tags = {
-    Name    = "${local.resource_name}-eso-role"
-    Env     = var.env
+    Name    = "${local.resource_name}-gha-runner-role"
     Project = var.project
+    Env     = var.env
   }
 }
 
 # IAM Policy
-resource "aws_iam_policy" "runner_eks_describe" {
-  name  = "${var.project}-${var.environment}-runner-eks-describe"
+resource "aws_iam_policy" "gha_runner_eks_describe_policy" {
+  name  = "${local.resource_name}-runner-eks-describe"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -33,20 +33,20 @@ resource "aws_iam_policy" "runner_eks_describe" {
       {
         Action   = ["eks:DescribeCluster"]
         Effect   = "Allow"
-        Resource = var.eks_cluster_arn
-      },
+        Resource = local.eks_cluster_arn
+      }
     ]
   })
 }
 
 # IAM Policy Attachment
-resource "aws_iam_role_policy_attachment" "runner_eks_describe" {
+resource "aws_iam_role_policy_attachment" "gha_runner_eks_describe_policy_attach" {
   role       = aws_iam_role.gha_runner_role.name
-  policy_arn = aws_iam_policy.runner_eks_runner_eks_describe.arn
+  policy_arn = aws_iam_policy.gha_runner_eks_describe_policy.arn
 }
 
-# Create IAM Role
-resource "aws_iam_instance_profile" "runner" {
-  name  = "${var.project}-${var.environment}-runner"
-  role  = aws_iam_role.runner[0].name
+# Create IAM instance Role
+resource "aws_iam_instance_profile" "gha_runner_instance_role" {
+  name  = "${local.resource_name}-runner-instance-role"
+  role  = aws_iam_role.gha_runner_role.name
 }
