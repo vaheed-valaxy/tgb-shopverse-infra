@@ -7,6 +7,8 @@ locals {
     Terraform   = "True"
   }
 
+  aws_account_id    = data.aws_caller_identity.current.account_id
+
   vpc_id            = data.terraform_remote_state.vpc.outputs.vpc_id
   public_subnet_ids = data.terraform_remote_state.vpc.outputs.public_subnet_ids
 
