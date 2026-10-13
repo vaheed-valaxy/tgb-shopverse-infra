@@ -69,6 +69,7 @@ resource "aws_iam_policy" "gha_runner_eks_describe_policy" {
           "ecr:DescribeImages"
         ]
         # Resource = "*"
+        # Resource = "arn:aws:ecr:*:${local.aws_account_id}:repository/*"
         Resource = [
           "arn:aws:ecr:${var.region}:${local.aws_account_id}:repository/shopverse-dev/*",
           "arn:aws:ecr:${var.region}:${local.aws_account_id}:repository/shopverse-qa/*",
