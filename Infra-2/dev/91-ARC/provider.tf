@@ -17,7 +17,6 @@ terraform {
       source  = "hashicorp/helm"
       version = "~> 3.1.0"
     }
-
   }
 
   # Remote Backend
