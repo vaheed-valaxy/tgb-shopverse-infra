@@ -29,11 +29,51 @@ resource "aws_iam_policy" "gha_runner_eks_describe_policy" {
 
   policy = jsonencode({
     Version = "2012-10-17"
+
     Statement = [
+      # ======================================================
+      # EKS Read
+      # ======================================================
       {
         Action   = ["eks:DescribeCluster"]
         Effect   = "Allow"
         Resource = local.eks_cluster_arn
+      },
+
+      # ======================================================
+      # ECR Authentication
+      # ======================================================
+      {
+        Sid    = "ECRAuthentication"
+        Effect = "Allow"
+
+        Action = ["ecr:GetAuthorizationToken"]
+        Resource = "*"
+      },
+
+      # ======================================================
+      # ECR Upload
+      # ======================================================
+      {
+        Effect = "Allow"
+        Action = [
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:BatchGetImage",
+          "ecr:PutImage",
+          "ecr:InitiateLayerUpload",
+          "ecr:UploadLayerPart",
+          "ecr:CompleteLayerUpload",
+          "ecr:DescribeRepositories",
+          "ecr:ListImages",
+          "ecr:DescribeImages"
+        ]
+        # Resource = "*"
+        Resource = [
+          "arn:aws:ecr:${var.region}:${local.aws_account_id}:repository/shopverse-dev/*",
+          "arn:aws:ecr:${var.region}:${local.aws_account_id}:repository/shopverse-qa/*",
+          "arn:aws:ecr:${var.region}:${local.aws_account_id}:repository/shopverse/*"
+        ]
       }
     ]
   })
