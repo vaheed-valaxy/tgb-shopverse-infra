@@ -39,7 +39,7 @@ resource "helm_release" "runners" {
         github_token = var.github_token
       }
 
-      runnerScaleSetName = "k8s-runners"
+      runnerScaleSetName = "k8s-gha-runners"
 
       template = {
         spec = {
