@@ -35,8 +35,9 @@ resource "aws_iam_policy" "gha_runner_eks_describe_policy" {
       # EKS Read
       # ======================================================
       {
-        Action   = ["eks:DescribeCluster"]
+        Sid      = "EKS Read"
         Effect   = "Allow"
+        Action   = ["eks:DescribeCluster"]
         Resource = local.eks_cluster_arn
       },
 
@@ -46,7 +47,6 @@ resource "aws_iam_policy" "gha_runner_eks_describe_policy" {
       {
         Sid    = "ECRAuthentication"
         Effect = "Allow"
-
         Action = ["ecr:GetAuthorizationToken"]
         Resource = "*"
       },
