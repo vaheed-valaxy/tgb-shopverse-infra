@@ -1,5 +1,5 @@
 resource "helm_release" "controller" {
-  name       = "arc"
+  name       = "arc-controller"
   namespace  = "arc-system"
   repository = "oci://ghcr.io/actions/actions-runner-controller-charts"
   chart      = "gha-runner-scale-set-controller"
