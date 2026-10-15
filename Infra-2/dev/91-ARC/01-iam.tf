@@ -99,9 +99,3 @@ resource "aws_iam_role_policy_attachment" "gha_runner_eks_describe_policy_attach
   role       = aws_iam_role.gha_runner_role.name
   policy_arn = aws_iam_policy.gha_runner_eks_describe_policy.arn
 }
-
-# Create IAM instance Role
-resource "aws_iam_instance_profile" "gha_runner_instance_role" {
-  name  = "${local.resource_name}-gha-runner-instance-role"
-  role  = aws_iam_role.gha_runner_role.name
-}
