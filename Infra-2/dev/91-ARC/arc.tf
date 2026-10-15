@@ -12,25 +12,16 @@ resource "helm_release" "controller" {
 }
 
 # -------------------------------------------------------
-# ARC Runner Namespace
-# -------------------------------------------------------
-resource "kubernetes_namespace" "runners" {
-  metadata {
-    name = "arc-runners"
-  }
-}
-
-# -------------------------------------------------------
 # ARC Runner Scale Set
 # -------------------------------------------------------
 resource "helm_release" "runners" {
   name       = "shopverse-dev-runners"
-  namespace  = kubernetes_namespace.runners.metadata[0].name
+  namespace  = "arc-runners"
   repository = "oci://ghcr.io/actions/actions-runner-controller-charts"
   chart      = "gha-runner-scale-set"
   version    = "0.15.0"
 
-  create_namespace = false
+  create_namespace = true
 
   values = [
     yamlencode({
@@ -67,8 +58,5 @@ resource "helm_release" "runners" {
     })
   ]
 
-  depends_on = [
-    helm_release.controller,
-    kubernetes_namespace.runners
-  ]
+  depends_on = [helm_release.controller]
 }
