@@ -1,12 +1,24 @@
-# Trust Policy
-data "aws_iam_policy_document" "gha_runner_trust_policy" {
+# Trust Policy - GHA Runner
+data "aws_iam_policy_document" "gha_runner_trust_policy" {      
   statement {
+    actions = ["sts:AssumeRoleWithWebIdentity"]
     effect  = "Allow"
-    actions = ["sts:AssumeRole"]
+
+    condition {
+      test     = "StringEquals"
+      variable = "${replace(local.eks_oidc_provider_url, "https://", "")}:sub"
+      values   = ["system:serviceaccount:arc-runners:shopverse-dev-runners-gha-rs-no-permission"]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "${replace(local.eks_oidc_provider_url, "https://", "")}:aud"
+      values   = ["sts.amazonaws.com"]
+    }
 
     principals {
-      type        = "Service"
-      identifiers = ["ec2.amazonaws.com"]
+      identifiers = [local.eks_oidc_provider_arn]
+      type        = "Federated"
     }
   }
 }
@@ -25,7 +37,7 @@ resource "aws_iam_role" "gha_runner_role" {
 
 # IAM Policy
 resource "aws_iam_policy" "gha_runner_eks_describe_policy" {
-  name  = "${local.resource_name}-gha-runner-eks-describe"
+  name  = "${local.resource_name}-gha-runner-ecr-push-eks-describe"
 
   policy = jsonencode({
     Version = "2012-10-17"
