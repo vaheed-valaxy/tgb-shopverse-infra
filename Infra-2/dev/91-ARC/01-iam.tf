@@ -58,15 +58,15 @@ resource "aws_iam_policy" "gha_runner_eks_describe_policy" {
         Effect = "Allow"
         Action = [
           "ecr:BatchCheckLayerAvailability",
-          "ecr:GetDownloadUrlForLayer",
           "ecr:BatchGetImage",
-          "ecr:PutImage",
-          "ecr:InitiateLayerUpload",
-          "ecr:UploadLayerPart",
           "ecr:CompleteLayerUpload",
+          "ecr:DescribeImages",
           "ecr:DescribeRepositories",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:InitiateLayerUpload",
           "ecr:ListImages",
-          "ecr:DescribeImages"
+          "ecr:PutImage",
+          "ecr:UploadLayerPart"          
         ]
         # Resource = "*"
         # Resource = "arn:aws:ecr:*:${local.aws_account_id}:repository/*"
