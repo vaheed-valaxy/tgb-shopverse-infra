@@ -1,5 +1,5 @@
 # Trust Policy - GHA Runner
-data "aws_iam_policy_document" "gha_runner_trust_policy" {      
+data "aws_iam_policy_document" "gha_arc_runner_trust_policy" {      
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
     effect  = "Allow"
@@ -24,20 +24,20 @@ data "aws_iam_policy_document" "gha_runner_trust_policy" {
 }
 
 # IAM Role
-resource "aws_iam_role" "gha_runner_role" {
-  name               = "${local.resource_name}-gha-runner-role"
-  assume_role_policy = data.aws_iam_policy_document.gha_runner_trust_policy.json
+resource "aws_iam_role" "gha_arc_runner_role" {
+  name               = "${local.resource_name}-gha-arc-runner-role"
+  assume_role_policy = data.aws_iam_policy_document.gha_arc_runner_trust_policy.json
 
   tags = {
-    Name    = "${local.resource_name}-gha-runner-role"
+    Name    = "${local.resource_name}-gha-arc-runner-role"
     Project = var.project
     Env     = var.env
   }
 }
 
 # IAM Policy
-resource "aws_iam_policy" "gha_runner_eks_describe_policy" {
-  name  = "${local.resource_name}-gha-runner-ecr-push-eks-describe"
+resource "aws_iam_policy" "gha_arc_runner_policy" {
+  name  = "${local.resource_name}-gha-arc-runner-policy"
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -95,7 +95,7 @@ resource "aws_iam_policy" "gha_runner_eks_describe_policy" {
 }
 
 # IAM Policy Attachment
-resource "aws_iam_role_policy_attachment" "gha_runner_eks_describe_policy_attach" {
-  role       = aws_iam_role.gha_runner_role.name
-  policy_arn = aws_iam_policy.gha_runner_eks_describe_policy.arn
+resource "aws_iam_role_policy_attachment" "gha_arc_runner_policy_attach" {
+  role       = aws_iam_role.gha_arc_runner_role.name
+  policy_arn = aws_iam_policy.gha_arc_runner_policy.arn
 }
