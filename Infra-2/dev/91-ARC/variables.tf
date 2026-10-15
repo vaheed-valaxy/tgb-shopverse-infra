@@ -7,6 +7,6 @@ variable "remote_state_s3_bucket_key" { default = "shopverse-vpc-eks/terraform.t
 
 variable "github_org"   { default = "vaheed-valaxy" }
 variable "github_repo"  { default = "tgb-shopverse-gitops" }
-variable "github_token" { sensitive = true }
+# variable "github_token" { sensitive = true }
 
 variable "gha_arc_runner_role_arn" {}
