@@ -59,10 +59,13 @@ variable "enable_node_ssh_access_from_bastion" {
 
 variable "bastion_sg_id" { default = null }
 
+variable "app_node_min_size"         { type = number }
+variable "app_node_max_size"         { type = number }
+variable "app_node_desired_capacity" { type = number }
 
-variable "desired_capacity" { type = number }
-variable "min_size"         { type = number }
-variable "max_size"         { type = number }
+variable "ci_node_min_size"         { default = 0 }
+variable "ci_node_max_size"         { default = 3 }
+variable "ci_node_desired_capacity" { default = 1 }
 
 variable "node_auto_scaler_tags" { default = {} }
 
