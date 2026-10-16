@@ -10,7 +10,7 @@ variable "cluster_subnet_ids"              { type = list(string) }
 variable "cluster_endpoint_private_access" { type = bool }
 variable "cluster_endpoint_public_access"  { type = bool }
 
-# variable cluster_addl_security_group_ids { type = list(string) }    # For Cluster to Node and vice versa communication
+# variable "cluster_addl_sg_ids" { type = list(string) }    # For Cluster to Node and vice versa communication
 
 
 #############################################             Node Group Variables           #################################################
