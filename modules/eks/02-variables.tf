@@ -1,19 +1,13 @@
 variable project    { type = string }
-
 variable env        { type = string }
 
 #############################################             Cluster Variables            #################################################
 
 variable "vpc_id"                        { type = string }
-
 variable "cluster_name"                  { type = string }
-
 variable cluster_version                 { type = string }
-
 variable cluster_subnet_ids              { type = list(string) }
-
 variable cluster_endpoint_private_access { type = bool }
-
 variable cluster_endpoint_public_access { type = bool }
 
 # variable cluster_addl_security_group_ids { type = list(string) }    # For Cluster to Node and vice versa communication
@@ -66,5 +60,3 @@ variable "node_auto_scaler_tags"    { default = {} }
 ############################################     Variables for Tagging subnets for ELB    #######################################################################
 # variable "public_subnet_ids"  { type = list(string) }
 # variable "private_subnet_ids" { type = list(string) }
-
-  
