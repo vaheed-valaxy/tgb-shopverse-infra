@@ -12,7 +12,7 @@ resource "aws_eks_cluster" "main" {
     subnet_ids              = var.cluster_subnet_ids
     endpoint_private_access = var.cluster_endpoint_private_access
     endpoint_public_access  = var.cluster_endpoint_public_access
-    # security_group_ids      = var.cluster_addl_security_group_ids      # For Cluster to Node and vice versa communication
+    # security_group_ids      = var.cluster_addl_sg_ids   # For Cluster to Node and vice versa communication
   }
 
   access_config {
