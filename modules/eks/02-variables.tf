@@ -3,23 +3,23 @@ variable env        { type = string }
 
 #############################################             Cluster Variables            #################################################
 
-variable "vpc_id"                        { type = string }
-variable "cluster_name"                  { type = string }
-variable cluster_version                 { type = string }
-variable cluster_subnet_ids              { type = list(string) }
-variable cluster_endpoint_private_access { type = bool }
-variable cluster_endpoint_public_access { type = bool }
+variable "vpc_id"                          { type = string }
+variable "cluster_name"                    { type = string }
+variable "cluster_version"                 { type = string }
+variable "cluster_subnet_ids"              { type = list(string) }
+variable "cluster_endpoint_private_access" { type = bool }
+variable "cluster_endpoint_public_access"  { type = bool }
 
 # variable cluster_addl_security_group_ids { type = list(string) }    # For Cluster to Node and vice versa communication
 
 
 #############################################             Node Group Variables           #################################################
 
-variable "node_ssh_key_name"     { default = null }
+variable "node_ssh_key_name"       { default = null }
 variable "node_subnet_ids"         { type = list(string) }
 
-variable "app_node_capacity_type"   { type = string }   # ON_DEMAND / SPOT
-variable "ci_node_capacity_type"    { type = string }   # ON_DEMAND / SPOT
+variable "app_node_capacity_type"  { type = string }   # ON_DEMAND / SPOT
+variable "ci_node_capacity_type"   { type = string }   # ON_DEMAND / SPOT
 
 variable "app_node_instance_types" { type = list(string) }
 variable "ci_node_instance_types"  { default = [] }
