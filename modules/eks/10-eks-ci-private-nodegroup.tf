@@ -9,16 +9,6 @@ resource "aws_eks_node_group" "main" {
   # disk_size       = var.node_disk_size        # Not needed if you use launch template and gives error
 
   # For Node group Security group
-  # dynamic "launch_template" {
-  #   for_each = var.enable_node_ssh_access_from_bastion ? [1] : []
-
-  #   content {
-  #     id      = aws_launch_template.eks_nodes.id
-  #     version = tostring(aws_launch_template.eks_nodes.latest_version)
-  #   }
-  # }
-
-  # For Node group Security group
   launch_template {
     id      = aws_launch_template.eks_nodes.id
     version = tostring(aws_launch_template.eks_nodes.latest_version)
