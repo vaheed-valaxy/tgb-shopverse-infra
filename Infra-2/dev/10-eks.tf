@@ -42,6 +42,6 @@ module "eks" {
   # public_subnet_ids   = module.vpc.public_subnet_ids      # For Tagging 
   # private_subnet_ids  = module.vpc.private_subnet_ids     # For Tagging 
 
-  # node_addl_sg_ids    = [module.bastion_sg.sg_id]                     # SSH to Node instance, This is additional cluster SG and the default cluster SG is intact
-  # cluster_addl_security_group_ids  = [module.vpc.bastion_host_sg_id]  # This is additional cluster SG and the default cluster SG will be intact
+  # node_addl_sg_ids     = [module.bastion_sg.sg_id]        # SSH to Node instance, This is additional cluster SG and the default cluster SG is intact
+  # cluster_addl_sg_ids  = [module.vpc.bastion_host_sg_id]  # This is additional cluster SG and the default cluster SG will be intact
 }
