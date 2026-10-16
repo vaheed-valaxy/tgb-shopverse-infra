@@ -45,9 +45,18 @@ resource "aws_eks_node_group" "main" {
 
   # Apply labels to each EC2 instance for easier scheduling and management in Kubernetes
   labels = {
-    "project" = var.project
-    "env"     = var.env
+    "project"  = var.project
+    "env"      = var.env
+    "workload" = "application"
   }
+
+  # taints = {
+  #   dedicated = {
+  #     key    = "dedicated"
+  #     value  = "application"
+  #     effect = "NO_SCHEDULE"
+  #   }
+  # }
 
   depends_on = [
     aws_iam_role_policy_attachment.node_AmazonEKSWorkerNodePolicy,
