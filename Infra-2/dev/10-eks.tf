@@ -12,6 +12,7 @@ module "eks" {
 
   vpc_id                           = module.vpc.vpc_id
 
+  # Cluster Variables
   cluster_name                     = local.eks_cluster_name
   cluster_version                  = "1.33"
   cluster_subnet_ids               = local.eks_cluster_subnet_ids       # (since vpc outputs as list, so [] not required)
@@ -20,19 +21,27 @@ module "eks" {
   # cluster_addl_security_group_ids  = [module.vpc.bastion_host_sg_id]  # This is additional cluster SG and the default cluster SG will be intact
 
   node_subnet_ids       = local.eks_node_subnet_ids
-  node_instance_types   = ["t3.small"]
-  node_capacity_type    = "SPOT"        # ON_DEMAND / SPOT
+  node_ssh_key_name     = "us-east-1"
   node_auto_scaler_tags = local.node_auto_scaler_tags
 
-  # Cluster and Node access from Bastion
-  enable_bastion_access_to_cluster    = true
-  enable_node_ssh_access_from_bastion = true
-  bastion_sg_id = local.bastion_sg_id                     # module.bastion_sg.sg_id
+  # Application NodeGroup Variables
+  app_node_instance_types = ["t3.small"]
+  app_node_capacity_type  = "SPOT"        # ON_DEMAND / SPOT
+  
+  # CI NodeGroup Variables
+  ci_node_instance_types  = ["t3.small"]
+  ci_node_capacity_type   = "SPOT"         # ON_DEMAND / SPOT
 
-  node_ssh_key_name     = "us-east-1"
+  # Cluster and Node access from Bastion
+  enable_bastion_access_to_cluster        = true
+  enable_app_node_ssh_access_from_bastion = true
+  enable_ci_node_ssh_access_from_bastion  = true
+  bastion_sg_id = local.bastion_sg_id                     
+
+  
   # node_addl_sg_ids    = [module.bastion_sg.sg_id]               # SSH to Node instance, This is additional cluster SG and the default cluster SG is intact
   
-  desired_capacity    = 2
-  min_size            = 2
-  max_size            = 4
+  desired_capacity = 2
+  min_size         = 2
+  max_size         = 4
 }
