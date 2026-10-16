@@ -21,13 +21,18 @@ variable cluster_endpoint_public_access { type = bool }
 
 #############################################             Node Group Variables           #################################################
 
-variable "node_ssh_key_name" { default = null }
+variable "node_ssh_key_name"     { default = null }
 
-variable node_subnet_ids     { type = list(string) }
+variable node_subnet_ids         { type = list(string) }
 
-variable node_instance_types { type = list(string) }
+variable node_capacity_type      { type = string }  # ON_DEMAND / SPOT
 
-variable node_capacity_type  { type = string }  # ON_DEMAND/ SPOT
+variable app_node_instance_types { type = list(string) }
+
+variable ci_node_instance_types { 
+  type    = list(string) 
+  default = []
+}
 
 variable "node_disk_size" {
   type        = number
@@ -39,6 +44,7 @@ variable "node_disk_size" {
     error_message = "Disk size must be between 8GB and 30GB."
   }
 }
+
 # variable "node_ssh_public_key" { type = string }
 
 variable "enable_bastion_access_to_cluster"    { 
