@@ -18,15 +18,14 @@ module "eks" {
   cluster_subnet_ids               = local.eks_cluster_subnet_ids       # (since vpc outputs as list, so [] not required)
   cluster_endpoint_public_access   = false                              # Control plane public access
   cluster_endpoint_private_access  = true                               # Control plane to Node and vice versa communication
-  # cluster_addl_security_group_ids  = [module.vpc.bastion_host_sg_id]  # This is additional cluster SG and the default cluster SG will be intact
-
+  
   node_subnet_ids       = local.eks_node_subnet_ids
   node_ssh_key_name     = "us-east-1"
   node_auto_scaler_tags = local.node_auto_scaler_tags
 
   # Application NodeGroup Variables
   app_node_instance_types = ["t3.small"]
-  app_node_capacity_type  = "SPOT"        # ON_DEMAND / SPOT
+  app_node_capacity_type  = "SPOT"         # ON_DEMAND / SPOT
   
   # CI NodeGroup Variables
   ci_node_instance_types  = ["t3.small"]
@@ -38,8 +37,8 @@ module "eks" {
   enable_ci_node_ssh_access_from_bastion  = true
   bastion_sg_id = local.bastion_sg_id                     
 
-  
   # node_addl_sg_ids    = [module.bastion_sg.sg_id]               # SSH to Node instance, This is additional cluster SG and the default cluster SG is intact
+  # cluster_addl_security_group_ids  = [module.vpc.bastion_host_sg_id]  # This is additional cluster SG and the default cluster SG will be intact
   
   desired_capacity = 2
   min_size         = 2
