@@ -18,7 +18,8 @@ module "eks" {
   cluster_subnet_ids               = local.eks_cluster_subnet_ids       # (since vpc outputs as list, so [] not required)
   cluster_endpoint_public_access   = false                              # Control plane public access
   cluster_endpoint_private_access  = true                               # Control plane to Node and vice versa communication
-  
+
+  # NodeGroup Common variables
   node_subnet_ids       = local.eks_node_subnet_ids
   node_ssh_key_name     = "us-east-1"
   node_auto_scaler_tags = local.node_auto_scaler_tags
