@@ -25,9 +25,9 @@ resource "aws_eks_node_group" "main" {
   }
 
   scaling_config {
-    desired_size = var.ci_node_desired_capacity
     min_size     = var.ci_node_min_size
     max_size     = var.ci_node_max_size
+    desired_size = var.ci_node_desired_capacity
   }
 
   update_config {
