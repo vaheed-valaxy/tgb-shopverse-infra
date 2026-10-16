@@ -5,13 +5,8 @@ resource "aws_eks_node_group" "main" {
   node_role_arn   = aws_iam_role.eks_nodegroup_role.arn
   subnet_ids      = var.node_subnet_ids
   instance_types  = var.ci_node_instance_types
-  capacity_type   = var.node_capacity_type   # ON_DEMAND/ SPOT
-  # disk_size       = var.node_disk_size     # Not needed if you use launch template and gives error
-
-  #remote_access {
-  #  ec2_ssh_key               = var.node_ssh_public_key    # "my-key"
-  #  source_security_group_ids = var.node_addl_sg_ids       # [bastion_sg]
-  #}
+  capacity_type   = var.ci_node_capacity_type   # ON_DEMAND / SPOT
+  # disk_size       = var.node_disk_size        # Not needed if you use launch template and gives error
 
   # For Node group Security group
   # dynamic "launch_template" {
@@ -67,7 +62,7 @@ resource "aws_eks_node_group" "main" {
 
   tags = merge(
     {
-      Name      = "${var.cluster_name}-node-group"
+      Name      = "${var.cluster_name}-ci-node-group"
       Project   = var.project
       Env       = var.env
       Terraform = true
