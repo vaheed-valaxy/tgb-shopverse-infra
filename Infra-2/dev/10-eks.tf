@@ -7,9 +7,6 @@ module "eks" {
   project             = var.project  # "shopverse"
   env                 = var.env      # "dev"
 
-  # public_subnet_ids   = module.vpc.public_subnet_ids      # For Tagging 
-  # private_subnet_ids  = module.vpc.private_subnet_ids     # For Tagging 
-
   vpc_id                           = module.vpc.vpc_id
 
   # Cluster Variables
@@ -37,11 +34,14 @@ module "eks" {
   enable_app_node_ssh_access_from_bastion = true
   enable_ci_node_ssh_access_from_bastion  = true
   bastion_sg_id = local.bastion_sg_id                     
-
-  # node_addl_sg_ids    = [module.bastion_sg.sg_id]               # SSH to Node instance, This is additional cluster SG and the default cluster SG is intact
-  # cluster_addl_security_group_ids  = [module.vpc.bastion_host_sg_id]  # This is additional cluster SG and the default cluster SG will be intact
   
   desired_capacity = 2
   min_size         = 2
   max_size         = 4
+
+  # public_subnet_ids   = module.vpc.public_subnet_ids      # For Tagging 
+  # private_subnet_ids  = module.vpc.private_subnet_ids     # For Tagging 
+
+  # node_addl_sg_ids    = [module.bastion_sg.sg_id]                     # SSH to Node instance, This is additional cluster SG and the default cluster SG is intact
+  # cluster_addl_security_group_ids  = [module.vpc.bastion_host_sg_id]  # This is additional cluster SG and the default cluster SG will be intact
 }
