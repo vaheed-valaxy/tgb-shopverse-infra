@@ -35,15 +35,10 @@ variable "node_disk_size" {
   }
 }
 
-variable "enable_bastion_access_to_cluster"    { 
-  type = bool
-  default = false 
-}
-
-variable "enable_node_ssh_access_from_bastion" { 
-  type = bool
-  default = false 
-}
+# type = bool
+variable "enable_bastion_access_to_cluster"        { default = false }
+variable "enable_app_node_ssh_access_from_bastion" { default = false }
+variable "enable_ci_node_ssh_access_from_bastion"  { default = false } 
 
 variable "bastion_sg_id" { default = null }
 
