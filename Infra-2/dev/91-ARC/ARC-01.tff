@@ -55,6 +55,33 @@ resource "helm_release" "runners" {
           }
         }
       }
+
+      template = {
+        spec = {
+          nodeSelector = {
+            workload = "ci"
+          }
+
+          tolerations = [
+            {
+              key      = "dedicated"
+              operator = "Equal"
+              value    = "ci"
+              effect   = "NoSchedule"
+            }
+          ]
+
+          containers = [
+            {
+              name            = "runner"
+              image           = "vaheeddockerhub/vaheed-arc-runner-img:v1"
+              imagePullPolicy = "Always"
+              command         = ["/home/runner/run.sh"]
+            }
+          ]
+        }
+      }
+
     })
   ]
 
