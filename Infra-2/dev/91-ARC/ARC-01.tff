@@ -29,7 +29,7 @@ resource "helm_release" "runners" {
       githubConfigUrl = "https://github.com/${var.github_org}/${var.github_repo}"
 
       # Existing Kubernetes Secret in arc-runners
-      githubConfigSecret = "shopverse-github-token"
+      githubConfigSecret = "shopverse-gitops-gha-arc-token"
 
       # Runner scale set configuration
       runnerScaleSetName = "shopverse-dev-runners"
