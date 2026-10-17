@@ -23,9 +23,7 @@ resource "helm_release" "runners" {
 
   create_namespace = true
 
-  values = [
-    file("${path.module}/values.yaml")
-  ]
+  values = [ file("${path.module}/values.yaml") ]
 
   depends_on = [helm_release.controller]
 }
