@@ -25,6 +25,7 @@ module "eks" {
   app_node_capacity_type  = "SPOT"         # ON_DEMAND / SPOT
   
   # CI NodeGroup Variables
+  create_ci_nodegroup     = true
   ci_node_instance_types  = ["t3.small"]
   ci_node_capacity_type   = "SPOT"         # ON_DEMAND / SPOT
 
