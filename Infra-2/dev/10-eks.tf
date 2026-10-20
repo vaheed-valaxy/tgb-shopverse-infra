@@ -18,9 +18,8 @@ module "eks" {
 
   # NodeGroup Common variables
   node_subnet_ids       = local.eks_node_subnet_ids
-  node_ssh_key_name     = "us-east-1"
   node_auto_scaler_tags = local.node_auto_scaler_tags
-
+  
   # Application NodeGroup Variables
   app_node_instance_types = ["t3.small"]
   app_node_capacity_type  = "SPOT"         # ON_DEMAND / SPOT
@@ -30,9 +29,10 @@ module "eks" {
   ci_node_capacity_type   = "SPOT"         # ON_DEMAND / SPOT
 
   # Cluster and Node access from Bastion
-  enable_bastion_access_to_cluster        = true
-  enable_app_node_ssh_access_from_bastion = true
-  enable_ci_node_ssh_access_from_bastion  = true
+  enable_bastion_access_to_cluster    = true
+  enable_node_ssh_access_from_bastion = true
+  node_ssh_key_name = "us-east-1"
+
   bastion_sg_id = local.bastion_sg_id                     
   
   desired_capacity = 2
