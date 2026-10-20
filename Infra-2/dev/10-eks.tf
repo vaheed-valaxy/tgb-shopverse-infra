@@ -29,7 +29,7 @@ module "eks" {
   ci_node_capacity_type   = "SPOT"         # ON_DEMAND / SPOT
 
   # Cluster and Node access from Bastion
-  enable_bastion_access_to_cluster    = true
+  enable_cluster_access_from_bastion  = true
   enable_node_ssh_access_from_bastion = true
   node_ssh_key_name = "us-east-1"
 
