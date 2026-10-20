@@ -47,7 +47,7 @@ variable "ci_node_max_size"         { default = 3 }
 variable "ci_node_desired_capacity" { default = 1 }
 
 # type = bool
-variable "enable_bastion_access_to_cluster"    { default = false }
+variable "enable_cluster_access_from_bastion"  { default = false }
 variable "enable_node_ssh_access_from_bastion" { default = false }
 variable "bastion_sg_id"                       { default = null }
 
