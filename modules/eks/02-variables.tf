@@ -15,7 +15,7 @@ variable "cluster_endpoint_public_access"  { type = bool }
 
 #############################################             Node Group Variables           #################################################
 
-# NodeGroup Common Variables
+# Node Group Common Variables
 variable "node_subnet_ids"       { type = list(string) }
 variable "node_ssh_key_name"     { default = null }
 variable "node_auto_scaler_tags" { default = {} }
@@ -31,14 +31,14 @@ variable "node_disk_size" {
   }
 }
 
-# APP NodeGroup Variables
+# APP Node Group Variables
 variable "app_node_capacity_type"    { type = string }   # ON_DEMAND / SPOT
 variable "app_node_instance_types"   { type = list(string) }
 variable "app_node_min_size"         { type = number }
 variable "app_node_max_size"         { type = number }
 variable "app_node_desired_capacity" { type = number }
 
-# CI NodeGroup Variables
+# CI Node Group Variables
 variable "create_ci_nodegroup"      { default = false }
 variable "ci_node_capacity_type"    { type = string }   # ON_DEMAND / SPOT
 variable "ci_node_instance_types"   { default = [] }
