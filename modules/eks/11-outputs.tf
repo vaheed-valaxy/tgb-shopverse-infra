@@ -33,9 +33,16 @@ output "oidc_provider_url" {
   value       = aws_iam_openid_connect_provider.eks_oidc.url
 }
 
-output "node_group_arn" {
+output "main_node_group_arn" {
   description = "ARN of the EKS Node Group"
   value       = aws_eks_node_group.main.arn
+}
+
+output "ci_node_group_arn" {
+  count = var.create_ci_nodegroup ? 1 : 0
+
+  description = "ARN of the EKS Node Group"
+  value       = aws_eks_node_group.ci.arn
 }
 
 output "cluster_security_group_id" {
