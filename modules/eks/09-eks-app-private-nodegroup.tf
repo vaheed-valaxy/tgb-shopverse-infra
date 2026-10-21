@@ -40,6 +40,12 @@ resource "aws_eks_node_group" "main" {
     max_unavailable = 1
   }
 
+  # taints {
+  #   key    = "dedicated"
+  #   value  = "application"
+  #   effect = "NO_SCHEDULE"
+  # }
+  
   # Force node group update when EKS AMI version changes
   # force_update_version = true
 
@@ -49,14 +55,6 @@ resource "aws_eks_node_group" "main" {
     "env"      = var.env
     "workload" = "application"
   }
-
-  # taints = {
-  #   dedicated = {
-  #     key    = "dedicated"
-  #     value  = "application"
-  #     effect = "NO_SCHEDULE"
-  #   }
-  # }
 
   depends_on = [
     aws_iam_role_policy_attachment.node_AmazonEKSWorkerNodePolicy,
