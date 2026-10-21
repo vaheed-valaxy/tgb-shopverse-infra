@@ -34,6 +34,7 @@ variable "node_disk_size" {
 # APP Node Group Variables
 variable "app_node_capacity_type"    { type = string }   # ON_DEMAND / SPOT
 variable "app_node_instance_types"   { type = list(string) }
+
 variable "app_node_min_size"         { type = number }
 variable "app_node_max_size"         { type = number }
 variable "app_node_desired_capacity" { type = number }
@@ -42,6 +43,7 @@ variable "app_node_desired_capacity" { type = number }
 variable "create_ci_nodegroup"      { default = false }
 variable "ci_node_capacity_type"    { type = string }   # ON_DEMAND / SPOT
 variable "ci_node_instance_types"   { default = [] }
+
 variable "ci_node_min_size"         { default = 0 }
 variable "ci_node_max_size"         { default = 3 }
 variable "ci_node_desired_capacity" { default = 1 }
