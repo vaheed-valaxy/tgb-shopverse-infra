@@ -38,11 +38,9 @@ resource "aws_eks_node_group" "ci" {
   }
 
   taints = {
-    dedicated = {
-      key    = "dedicated"
-      value  = "ci"
-      effect = "NO_SCHEDULE"
-    }
+    key    = "dedicated"
+    value  = "ci"
+    effect = "NO_SCHEDULE"
   }
 
   depends_on = [
