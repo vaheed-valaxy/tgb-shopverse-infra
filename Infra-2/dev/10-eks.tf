@@ -33,9 +33,9 @@ module "eks" {
   ci_node_instance_types  = ["t3.small"]
   ci_node_capacity_type   = "SPOT"         # ON_DEMAND / SPOT
 
-  ci_node_min_size         = 2
-  ci_node_max_size         = 4
-  ci_node_desired_capacity = 2
+  ci_node_min_size         = 1
+  ci_node_max_size         = 3
+  ci_node_desired_capacity = 1
 
   # Cluster and Node access from Bastion
   enable_cluster_access_from_bastion  = true
