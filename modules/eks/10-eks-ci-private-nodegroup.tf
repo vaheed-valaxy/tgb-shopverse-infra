@@ -27,6 +27,12 @@ resource "aws_eks_node_group" "ci" {
     max_unavailable = 1
   }
 
+  taint {
+    key    = "dedicated"
+    value  = "ci"
+    effect = "NO_SCHEDULE"
+  }
+
   # Force node group update when EKS AMI version changes
   # force_update_version = true
 
@@ -35,12 +41,6 @@ resource "aws_eks_node_group" "ci" {
     "project"  = var.project
     "env"      = var.env
     "workload" = "ci"
-  }
-
-  taints = {
-    key    = "dedicated"
-    value  = "ci"
-    effect = "NO_SCHEDULE"
   }
 
   depends_on = [
