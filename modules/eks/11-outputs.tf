@@ -39,10 +39,8 @@ output "main_node_group_arn" {
 }
 
 output "ci_node_group_arn" {
-  count = var.create_ci_nodegroup ? 1 : 0
-
   description = "ARN of the EKS Node Group"
-  value       = aws_eks_node_group.ci.arn
+  value       = var.create_ci_nodegroup ? aws_eks_node_group.ci[0].arn : "NO CI NODEGROUP CREATED"
 }
 
 output "cluster_security_group_id" {
