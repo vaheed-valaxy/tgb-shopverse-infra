@@ -23,11 +23,19 @@ module "eks" {
   # Application NodeGroup Variables
   app_node_instance_types = ["t3.small"]
   app_node_capacity_type  = "SPOT"         # ON_DEMAND / SPOT
+
+  app_node_min_size         = 2
+  app_node_max_size         = 4
+  app_node_desired_capacity = 2
   
   # CI NodeGroup Variables
   create_ci_nodegroup     = true
   ci_node_instance_types  = ["t3.small"]
   ci_node_capacity_type   = "SPOT"         # ON_DEMAND / SPOT
+
+  ci_node_min_size         = 2
+  ci_node_max_size         = 4
+  ci_node_desired_capacity = 2
 
   # Cluster and Node access from Bastion
   enable_cluster_access_from_bastion  = true
@@ -35,10 +43,7 @@ module "eks" {
   node_ssh_key_name = "us-east-1"
 
   bastion_sg_id = local.bastion_sg_id                     
-  
-  desired_capacity = 2
-  min_size         = 2
-  max_size         = 4
+
 
   # public_subnet_ids   = module.vpc.public_subnet_ids      # For Tagging 
   # private_subnet_ids  = module.vpc.private_subnet_ids     # For Tagging 
