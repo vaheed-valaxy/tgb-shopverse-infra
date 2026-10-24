@@ -40,7 +40,7 @@ module "eks" {
   # Cluster and Node access from Bastion
   enable_cluster_access_from_bastion  = true
   enable_node_ssh_access_from_bastion = true
-  node_ssh_key_name = "us-east-1"
+  node_ssh_key_name = var.public_key_name       # "us-east-1"
 
   bastion_sg_id = local.bastion_sg_id                     
 
