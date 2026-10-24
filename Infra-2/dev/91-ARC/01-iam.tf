@@ -25,7 +25,7 @@ data "aws_iam_policy_document" "gha_arc_runner_trust_policy" {
 
 # IAM Role
 resource "aws_iam_role" "gha_arc_runner_role" {
-  name               = "${local.resource_name}-gha-arc-runner-role"
+  name               = "${local.resource_name}-gha-arc-runner-role"                        # shopverse-dev-gha-arc-runner-role
   assume_role_policy = data.aws_iam_policy_document.gha_arc_runner_trust_policy.json
 
   tags = {
