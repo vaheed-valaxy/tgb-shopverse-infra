@@ -4,8 +4,8 @@ resource "aws_eks_node_group" "main" {
   node_group_name = "${var.cluster_name}-app-node-group"
   node_role_arn   = aws_iam_role.eks_nodegroup_role.arn
   subnet_ids      = var.node_subnet_ids
-  instance_types  = var.ci_node_instance_types
-  capacity_type   = var.ci_node_capacity_type   # ON_DEMAND/ SPOT
+  instance_types  = var.app_node_instance_types
+  capacity_type   = var.app_node_capacity_type   # ON_DEMAND/ SPOT
   # disk_size       = var.node_disk_size        # Not needed if you use launch template and gives error
 
   #remote_access {
