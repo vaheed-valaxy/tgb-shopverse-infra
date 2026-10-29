@@ -7,7 +7,7 @@ data "aws_iam_policy_document" "gha_arc_runner_trust_policy" {
     condition {
       test     = "StringEquals"
       variable = "${replace(local.eks_oidc_provider_url, "https://", "")}:sub"
-      values   = ["system:serviceaccount:arc-runners:shopverse-dev-runners-gha-rs-no-permission"]
+      values   = ["system:serviceaccount:arc-runners:shopverse-gha-arc-runner-sa"]
     }
 
     condition {
