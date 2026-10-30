@@ -44,13 +44,23 @@ resource "aws_iam_policy" "gha_arc_runner_policy" {
 
     Statement = [
       # ======================================================
-      # EKS Read
+      # EKS Read (For kube config)
       # ======================================================
       {
         Sid      = "EKSRead"
         Effect   = "Allow"
         Action   = ["eks:DescribeCluster"]
         Resource = local.eks_cluster_arn
+      },
+
+      # ======================================================
+      # EKS List Clusters
+      # ======================================================
+      {
+        Sid      = "EKSListClusters"
+        Effect   = "Allow"
+        Action   = ["eks:ListClusters"]
+        Resource = "*"
       },
 
       # ======================================================
