@@ -6,7 +6,7 @@ module "rds" {
   identifier              = local.identifier
   availability_zone       = local.availability_zone        # var.availability_zone
   engine                  = "mysql"
-  engine_version          = "8.0.44"
+  engine_version          = "8.0.46"
   instance_class          = "db.t3.micro"
   allocated_storage       = 10  # 20
   storage_type            = "gp2"
