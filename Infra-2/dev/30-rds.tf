@@ -52,4 +52,6 @@ module "rds" {
   vpc_security_group_ids  = [module.rds_mysql_sg.sg_id]
 
   common_tags = local.common_tags
+
+  depends_on = [ module.rds_mysql_sg, aws_security_group_rule.bastion_to_mysql, aws_security_group_rule.backend_to_mysql ]
 }
