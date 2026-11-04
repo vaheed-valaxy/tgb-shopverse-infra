@@ -49,7 +49,7 @@ module "rds" {
   db_username             = local.shopverse_secret_json.username
   db_password             = local.shopverse_secret_json.password
   db_subnet_group_name    = local.db_subnet_group_name
-  vpc_security_group_ids  = local.rds_vpc_security_group_ids
+  vpc_security_group_ids  = [module.rds_mysql_sg.sg_id]
 
   common_tags = local.common_tags
 }
