@@ -8,10 +8,10 @@ terraform apply -target=module.ecr
 terraform apply -target=module.eks
 terraform apply -target=module.secrets_manager
 terraform apply -target=module.rds
+terraform apply -target=module.alb
 
 terraform apply argocd
 terraform apply eso
-terraform apply alb
 terraform apply aws-lbc
 ```
 ## 2. If u want ARC Runner for CI
