@@ -31,14 +31,14 @@ kubectl apply -f dev-external-secrets.yaml
 ```
 
 ## 4. If u want ARC Runner 
-**4.1 for CI**  
+- **for CI**  
 repo: `tgb-shopverse-gitops`  
 ```bash
 cd k8s/rbac/platform
 
 kubectl apply -f gha-arc-runner-sa.yaml
 ```
-**4.2 for GITOPS**                         
+- **for GITOPS**                         
 repo: `tgb-shopverse-gitops`  
 ```bash
 cd k8s/rbac/platform
