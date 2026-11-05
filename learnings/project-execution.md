@@ -1,6 +1,8 @@
 # Full Project Execution Flow
 ## 1. Create the required infrastructure  
 ```bash
+terraform apply s3
+
 terraform apply -target=module.vpc
 terraform apply -target=module.bastion_ec2
 terraform apply -target=module.nat_instance
@@ -16,7 +18,7 @@ terraform apply aws-lbc
 ```
 ## 2. If u want ARC Runner for CI
 ```bash
-terraform apply ARC
+terraform apply 91-ARC
 ```
 
 ## 3. Create ESO secrets in kubernetes
