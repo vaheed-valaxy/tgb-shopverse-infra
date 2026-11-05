@@ -18,6 +18,7 @@ terraform apply aws-lbc
 ```bash
 terraform apply ARC
 ```
+
 ## 3. Create ESO secrets in kubernetes
 repo: `tgb-shopverse-gitops`
 ```bash
@@ -26,6 +27,7 @@ cd k8s/eso-external-secrets
 kubectl apply -f cluster-secret-store.yaml
 kubectl apply -f dev-external-secrets.yaml
 ```
+
 ## 4. If u want ARC Runner 
 **4.1 for CI**  
 repo: `tgb-shopverse-gitops`  
@@ -41,6 +43,41 @@ cd k8s/rbac/platform
 
 kubectl apply -f gitops-arc-runner-sa-perms.yaml
 ```
+
+## 5. Create ARC Runner ArgoCD applications    
+repo: `tgb-shopverse-gitops`   
+- For ARC runners  
+```bash
+# Create secret
+# Fine grained Token: tgb-shopverse-infra, backend, frontend, gitops (Admin: read and write) 
+kubectl create secret generic shopverse-gha-arc-token \
+  -n arc-runners \
+  --from-literal=github_token=<GITHUB_TOKEN>
+
+cd argocd/platform/gha-arc-runners/projects
+kubectl apply -f 01-arc-controller.yaml
+kubectl apply -f 02-arc-runners.yaml
+
+cd argocd/platform/gha-arc-runners/apps
+kubectl apply -f 01-controller.yaml
+kubectl apply -f 02-infra-arc-runner.yaml
+kubectl apply -f 03-frontend-arc-runner.yaml
+kubectl apply -f 04-backend-arc-runner.yaml
+kubectl apply -f 05-gitops-arc-runner.yaml
+```
+
+## 6. Create Project related ArgoCD Applications  
+repo: `tgb-shopverse-gitops`  
+```bash
+cd argocd/dev/projects
+kubectl apply -f shopverse-dev.yaml
+
+cd atgocd/dev/apps
+kubectl apply -f applicationset.yaml
+```
+
+
+
 
 
 
