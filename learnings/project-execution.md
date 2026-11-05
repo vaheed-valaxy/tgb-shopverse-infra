@@ -34,7 +34,7 @@ cd k8s/rbac/platform
 
 kubectl apply -f gha-arc-runner-sa.yaml
 ```
-**4.2 for GITOPS** 
+**4.2 for GITOPS**                         
 repo: `tgb-shopverse-gitops`  
 ```bash
 cd k8s/rbac/platform
