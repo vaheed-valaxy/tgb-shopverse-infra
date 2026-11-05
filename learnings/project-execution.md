@@ -50,7 +50,8 @@ repo: `tgb-shopverse-gitops`
 - **Create Secret**  
 ```bash
 # Create secret
-# Fine grained Token: tgb-shopverse-infra, backend, frontend, gitops (Admin: read and write) 
+# Fine grained Token: tgb-shopverse-infra, backend, frontend, gitops (Admin: read and write)
+
 kubectl create secret generic shopverse-gha-arc-token \
   -n arc-runners \
   --from-literal=github_token=<GITHUB_TOKEN>
