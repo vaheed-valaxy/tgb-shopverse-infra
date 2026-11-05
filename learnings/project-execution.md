@@ -21,7 +21,7 @@ terraform apply aws-lbc
 terraform apply 91-ARC
 ```
 
-## 3. Create ESO secrets in kubernetes
+## 3. Create ESO secrets in Kubernetes
 repo: `tgb-shopverse-gitops`
 ```bash
 cd k8s/eso-external-secrets
