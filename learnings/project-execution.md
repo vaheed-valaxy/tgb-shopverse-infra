@@ -46,19 +46,25 @@ kubectl apply -f gitops-arc-runner-sa-perms.yaml
 
 ## 5. Create ARC Runner ArgoCD applications    
 repo: `tgb-shopverse-gitops`   
-- For ARC runners  
+**- Create Secrest**  
 ```bash
 # Create secret
 # Fine grained Token: tgb-shopverse-infra, backend, frontend, gitops (Admin: read and write) 
 kubectl create secret generic shopverse-gha-arc-token \
   -n arc-runners \
   --from-literal=github_token=<GITHUB_TOKEN>
-
+```
+**- Create Projects**  
+```bash
 cd argocd/platform/gha-arc-runners/projects
+
 kubectl apply -f 01-arc-controller.yaml
 kubectl apply -f 02-arc-runners.yaml
-
+```
+**- Create Applications**  
+```bash
 cd argocd/platform/gha-arc-runners/apps
+
 kubectl apply -f 01-controller.yaml
 kubectl apply -f 02-infra-arc-runner.yaml
 kubectl apply -f 03-frontend-arc-runner.yaml
@@ -69,9 +75,11 @@ kubectl apply -f 05-gitops-arc-runner.yaml
 ## 6. Create Project related ArgoCD Applications  
 repo: `tgb-shopverse-gitops`  
 ```bash
+# Create Project
 cd argocd/dev/projects
 kubectl apply -f shopverse-dev.yaml
 
+# Create ApplicationSet
 cd atgocd/dev/apps
 kubectl apply -f applicationset.yaml
 ```
