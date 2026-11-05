@@ -45,8 +45,9 @@ kubectl apply -f gitops-arc-runner-sa-perms.yaml
 ```
 
 ## 5. Create ARC Runner ArgoCD applications    
-repo: `tgb-shopverse-gitops`   
-**- Create Secrest**  
+repo: `tgb-shopverse-gitops`  
+
+- **Create Secrest**  
 ```bash
 # Create secret
 # Fine grained Token: tgb-shopverse-infra, backend, frontend, gitops (Admin: read and write) 
