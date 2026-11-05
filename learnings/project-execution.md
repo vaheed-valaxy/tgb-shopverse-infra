@@ -75,12 +75,14 @@ kubectl apply -f 05-gitops-arc-runner.yaml
 
 ## 6. Create Project related ArgoCD Applications  
 repo: `tgb-shopverse-gitops`  
+
+- **Create Project**  
 ```bash
-- **Create Project**
 cd argocd/dev/projects
 kubectl apply -f shopverse-dev.yaml
-
-- **Create ApplicationSet**
+```
+- **Create ApplicationSet**  
+```bash
 cd atgocd/dev/apps
 kubectl apply -f applicationset.yaml
 ```
